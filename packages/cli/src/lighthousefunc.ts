@@ -2,21 +2,59 @@ import * as fs from 'fs';
 import * as lighthouse from 'lighthouse';
 import * as chromeLauncher  from 'chrome-launcher';
 import * as path from 'path';
-import * as seedrandom from 'seedrandom';
+import * as seedRandom from 'seedrandom';
+import * as constants from 'lighthouse/lighthouse-core/config/constants';
+import config from './lh-config';
+
+const devices = {
+    desktop: {
+        formFactor: 'desktop',
+        throttling: constants.throttling.desktopDense4G,
+        screenEmulation: constants.screenEmulationMetrics.desktop,
+        emulatedUserAgent: constants.userAgents.desktop,
+    },
+    per: {
+        throttlingMethod: 'devtools',
+        onlyCategories: ['performance'],
+    },
+    mobile: {
+
+    }
+}
+
 const defaultDirectory = 'lh';
 export default async function (url:string,options:any) {
+    console.log('options------->',options)
     const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
-    const runnerResult = await lighthouse(url, {...options, port: chrome.port});
+    const {
+        settings
+    } = options;
+
+    const runnerResult = await lighthouse(url, {
+        ...options
+        , port: chrome.port
+    },{
+        ...config,
+        settings: {
+            ...config.settings,
+            ...devices[settings.device],
+        }
+    });
+
+    // config.settings.emulatedFormFactor = 'desktop';
     const reportHtml = runnerResult.report;
 
     if (!fs.existsSync(path.resolve(defaultDirectory))) {
         fs.mkdirSync(path.resolve(defaultDirectory));
     }
 
-    const rng = seedrandom();
+    const rng = seedRandom();
+
+    //  runnerResult.lhr： lighthouseVersion、requestedUrl、finalUrl、audits
+
     fs.writeFileSync(path.resolve(defaultDirectory+'/report-'+rng()+'.html'), reportHtml);
 
-    
+
     await chrome.kill();
 
 }
