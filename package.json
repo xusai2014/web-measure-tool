@@ -1,0 +1,42 @@
+{
+  "name": "web-measure-tool",
+  "version": "1.0.0",
+  "description": "网页性能分析工具，分析宿主环境转化时长、网络通信时长、加载执行等",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "./packages/**/*"
+  ],
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider docz dev",
+    "docz:build": "docz build",
+    "docz:serve": "docz build && docz serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xusai2014/web-measure-tool.git"
+  },
+  "keywords": [
+    "web",
+    "measure",
+    "tool"
+  ],
+  "author": "jerryxu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xusai2014/web-measure-tool/issues"
+  },
+  "homepage": "https://github.com/xusai2014/web-measure-tool#readme",
+  "devDependencies": {
+    "@emotion/core": "10.1.1",
+    "cross-env": "^7.0.3",
+    "docz": "latest",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "remark-mdx": "^2.0.0-next.9",
+    "typescript": "^4.8.3"
+  },
+  "resolutions": {
+    "remark-mdx": "^2.0.0-next.9"
+  }
+}

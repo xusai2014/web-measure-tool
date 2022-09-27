@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "es2015",
+    "moduleResolution": "classic"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
