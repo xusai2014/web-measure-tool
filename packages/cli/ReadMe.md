@@ -3,6 +3,9 @@
 npm run dev m https://www.baidu.com/ -- --settings.device desktop
 ```
 
+pure esm package
+https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
 ## 
 
 [lighthouse 架构图](https://github.com/GoogleChrome/lighthouse/blob/master/docs/architecture.md)

@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "moduleResolution": "node",
-    "outDir":"./lib"
+    "outDir":"./lib",
+    "watch": true
   },
   "include": [
     "./src"

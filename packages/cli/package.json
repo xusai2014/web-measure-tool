@@ -1,15 +1,23 @@
 {
   "name": "@perfe/wml-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "网页性能评估 CLI",
-  "keywords": ["web","measure","performace","lighthouse"],
+  "keywords": [
+    "web",
+    "measure",
+    "performace",
+    "lighthouse",
+    "CLI",
+    "node"
+  ],
+  "main": "lib/index.js",
   "bin": {
     "wml": "lib/index.js"
   },
   "scripts": {
     "prepack": "npm run build",
     "build": "npx tsc",
-    "dev": "npx nodemon src/index.ts"
+    "dev": "npx ts-node  src/index.ts"
   },
   "files": [
     "./lib/**/*",
@@ -42,6 +50,8 @@
     "cac": "^6.7.14",
     "chrome-launcher": "^0.15.1",
     "lighthouse": "^9.6.7",
+    "ora": "^6.1.2",
+    "picocolors": "^1.0.0",
     "seedrandom": "^3.0.5"
   }
 }

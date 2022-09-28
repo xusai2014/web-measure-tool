@@ -4,7 +4,7 @@ import lighthouse_func from "./lighthousefunc";
 const cli = cac('wml');
 
 cli.command('m <url>', 'measure 评测web页面')
-    .option('--settings <settings>', 'Setting 设置')
+    .option('-s, --settings <settings>', 'Setting 设置')
     .example('--settings.device desktop')
     .action(async (url,options,...rest) => {
         const {
@@ -16,7 +16,7 @@ cli.command('m <url>', 'measure 评测web页面')
                 settings
             });
         } catch (e) {
-            console.error('wml 工具异常')
+            console.error('wml 工具异常',e)
         }
 
     });
