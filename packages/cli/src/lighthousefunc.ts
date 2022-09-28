@@ -6,6 +6,7 @@ import * as seedRandom from 'seedrandom';
 import * as constants from 'lighthouse/lighthouse-core/config/constants';
 import config from './lh-config';
 
+
 const devices = {
     desktop: {
         formFactor: 'desktop',
@@ -25,6 +26,8 @@ const devices = {
 const defaultDirectory = 'lh';
 export default async function (url:string,options:any) {
     const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
+    const { default:ora } = await import('ora');
+    const spinner = ora('启动性能评估抓取').start();
     const {
         settings
     } = options;
@@ -53,6 +56,7 @@ export default async function (url:string,options:any) {
     const pathname = path.resolve(defaultDirectory+'/report-'+rng()+'.html')
     fs.writeFileSync(pathname, reportHtml);
     await chrome.kill();
+    spinner.stop();
     console.info("生成性能评估报告", pathname)
 
 }
