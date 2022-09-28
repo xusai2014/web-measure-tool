@@ -1,6 +1,6 @@
 ## 本地调试
 ```shell
-npm run dev m https://wsevlf001.eeo.im/client/cloud/cs/im -- --settings.device desktop
+npm run dev m https://www.baidu.com/ -- --settings.device desktop
 ```
 
 ## 

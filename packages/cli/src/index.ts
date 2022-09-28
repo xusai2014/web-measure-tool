@@ -10,9 +10,14 @@ cli.command('m <url>', 'measure 评测web页面')
             settings = {}
         } = options;
 
-        await lighthousefunc(url, {
-            settings
-        });
+        try {
+            await lighthousefunc(url, {
+                settings
+            });
+        } catch (e) {
+            console.error('wml 工具异常')
+        }
+
     });
 
 cli.help();

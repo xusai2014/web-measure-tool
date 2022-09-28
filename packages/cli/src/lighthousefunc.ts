@@ -24,7 +24,6 @@ const devices = {
 
 const defaultDirectory = 'lh';
 export default async function (url:string,options:any) {
-    console.log('options------->',options)
     const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
     const {
         settings
@@ -51,10 +50,9 @@ export default async function (url:string,options:any) {
     const rng = seedRandom();
 
     //  runnerResult.lhr： lighthouseVersion、requestedUrl、finalUrl、audits
-
-    fs.writeFileSync(path.resolve(defaultDirectory+'/report-'+rng()+'.html'), reportHtml);
-
-
+    const pathname = path.resolve(defaultDirectory+'/report-'+rng()+'.html')
+    fs.writeFileSync(pathname, reportHtml);
     await chrome.kill();
+    console.info("生成性能评估报告", pathname)
 
 }
