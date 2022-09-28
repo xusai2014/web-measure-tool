@@ -1,9 +1,13 @@
 {
-  "name": "@wml/cli",
+  "name": "@perfe/wml-cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "lib/index.js",
+  "description": "网页性能评估 CLI",
+  "keywords": ["web","measure","performace","lighthouse"],
+  "bin": {
+    "wml": "lib/index.js"
+  },
   "scripts": {
+    "prepublish": "npm run build",
     "build": "npx tsc",
     "dev": "npx nodemon src/index.ts"
   },
@@ -38,6 +42,7 @@
     "ext": "ts"
   },
   "dependencies": {
+    "perfume.js": "^7.0.0",
     "seedrandom": "^3.0.5"
   }
 }
