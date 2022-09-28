@@ -1,6 +1,6 @@
 {
   "name": "@perfe/wml-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "网页性能评估 CLI",
   "keywords": [
     "web",
@@ -51,7 +51,6 @@
     "chrome-launcher": "^0.15.1",
     "lighthouse": "^9.6.7",
     "ora": "^6.1.2",
-    "picocolors": "^1.0.0",
     "seedrandom": "^3.0.5"
   }
 }
