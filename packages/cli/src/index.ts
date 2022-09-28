@@ -1,5 +1,6 @@
+#!/usr/bin/env node
 import { cac } from 'cac';
-import lighthousefunc from "./lighthousefunc";
+import lighthouse_func from "./lighthousefunc";
 const cli = cac('wml');
 
 cli.command('m <url>', 'measure 评测web页面')
@@ -11,7 +12,7 @@ cli.command('m <url>', 'measure 评测web页面')
         } = options;
 
         try {
-            await lighthousefunc(url, {
+            await lighthouse_func(url, {
                 settings
             });
         } catch (e) {
