@@ -1,12 +1,15 @@
-## 本地调试
-```shell
-npm run dev m https://www.baidu.com/ -- --settings.device desktop
-```
 
-pure esm package
-https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
-## 
+# wml (web-measure-tool) 🏝️
+
+> web measure tool for enterprise application
+
+
+## 工具功能介绍
+
+### 性能评估工具 (需要预装chrome，如需指定无头浏览器)
+
+lighthouse + chrome-launch
 
 [lighthouse 架构图](https://github.com/GoogleChrome/lighthouse/blob/master/docs/architecture.md)
 
@@ -40,3 +43,22 @@ defaultPass.devtoolslog.jso-开发工具事件日志包括网络请求、加载�
       cpuSlowdownMultiplier?: number
 }
 ````
+## 本地调试
+```shell
+npm run dev m https://www.baidu.com/ -- --settings.device desktop
+```
+
+
+
+````markdown
+>>>>  False expression: Non-string value passed to ts.resolveTypeReferenceDirective
+
+解决方式： npm install -g ts-node
+````
+
+## 本地开发
+- 模块解析使用 NodeNext
+- 三方库解析 esm package 使用dynamic import
+
+注意  pure esm package
+https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c

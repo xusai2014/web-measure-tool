@@ -56,7 +56,6 @@ export default async function (url:string,options:any) {
     const pathname = path.resolve(defaultDirectory+'/report-'+rng()+'.html')
     fs.writeFileSync(pathname, reportHtml);
     await chrome.kill();
-    spinner.stop();
-    console.info("生成性能评估报告", pathname)
+    spinner.succeed(`生成性能评估报告${pathname}`)
 
 }
