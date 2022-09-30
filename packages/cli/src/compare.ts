@@ -1,6 +1,4 @@
 import * as fs from 'fs';
-
-import * as resemble from 'resemblejs';
 import * as chromeLauncher from "chrome-launcher";
 import config from "./lh-config";
 import * as path from "path";
@@ -10,6 +8,14 @@ import * as open from 'open';
 import devices from "./devices";
 
 const defaultDirectory = 'wml_match';
+
+const screenEmulation = {
+    mobile: true,
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 2.625,
+    disabled: false,
+}
 
 export default async function (url, image, options) {
 
@@ -21,6 +27,15 @@ export default async function (url, image, options) {
         const {
             settings = {}
         } = options;
+        if(settings.width){
+            screenEmulation.width = settings.width;
+        }
+        if(settings.height) {
+            screenEmulation.height = settings.height;
+        }
+        if (settings.device) {
+            screenEmulation.mobile = settings.device === 'desktop'? false: true;
+        }
 
         const runnerResult = await lighthouse(url, {
             ...options
@@ -33,7 +48,10 @@ export default async function (url, image, options) {
                 onlyAudits: ['final-screenshot'],
                 onlyCategories: [
                     'performance'
-                ]
+                ],
+                screenEmulation: {
+                    ...screenEmulation,
+                }
             }
         });
         const rng = seedRandom();
@@ -48,15 +66,15 @@ export default async function (url, image, options) {
         ];
         const obj = {
             COMPARE_IMG1: img1Path,
-            COMPARE_IMG2: 'data:image/jpeg;base64,' + img2path ,
-            COMPARE_RESEMBLE_JS_PATH: path.join(__dirname,'../templates/resemble.js')
+            COMPARE_IMG2: 'data:image/jpeg;base64,' + img2path,
+            COMPARE_RESEMBLE_JS_PATH: path.join(__dirname, '../templates/resemble.js')
         }
-        let htmlStr = fs.readFileSync(path.join(__dirname,'../templates/compare.html')).toString('utf-8')
-        list.map(function (v){
-            htmlStr = htmlStr.replace(v,obj[v]);
+        let htmlStr = fs.readFileSync(path.join(__dirname, '../templates/compare.html')).toString('utf-8')
+        list.map(function (v) {
+            htmlStr = htmlStr.replace(v, obj[v]);
         })
 
-        const destination_html = path.resolve( `${rstr}test.html`)
+        const destination_html = path.resolve(`${rstr}test.html`)
         fs.writeFileSync(destination_html, htmlStr);
 
         await open(destination_html, {app: {name: 'google chrome', arguments: ['--incognito']}});

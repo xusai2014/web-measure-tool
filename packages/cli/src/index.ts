@@ -31,7 +31,9 @@ cli.command('c <url> <image>', 'compare 页面和设计稿')
         } = options;
 
         try {
-            await compare(url,image,options)
+            await compare(url,image, {
+                settings
+            })
         } catch (e) {
             console.error('wml 工具异常',e)
         }

@@ -1,6 +1,8 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "moduleResolution": "classic",
+    "module": "ES6",    
     "lib": [
       "dom",
       "dom.iterable",
