@@ -3,27 +3,11 @@ import * as lighthouse from 'lighthouse';
 import * as chromeLauncher  from 'chrome-launcher';
 import * as path from 'path';
 import * as seedRandom from 'seedrandom';
-import * as constants from 'lighthouse/lighthouse-core/config/constants';
 import config from './lh-config';
+import devices from "./devices";
 
 
-const devices = {
-    desktop: {
-        formFactor: 'desktop',
-        throttling: constants.throttling.desktopDense4G,
-        screenEmulation: constants.screenEmulationMetrics.desktop,
-        emulatedUserAgent: constants.userAgents.desktop,
-    },
-    per: {
-        throttlingMethod: 'devtools',
-        onlyCategories: ['performance'],
-    },
-    mobile: {
-
-    }
-}
-
-const defaultDirectory = 'lh';
+const defaultDirectory = 'wml_lh';
 export default async function (url:string,options:any) {
     const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
     const { default:ora } = await import('ora');
