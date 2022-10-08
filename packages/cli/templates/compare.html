@@ -6,20 +6,26 @@
 <body style="padding: 10px">
 <h1 style="text-align: center;margin:20px 10px 10px">设计稿还原度对比分析</h1>
 <section style="display: flex;flex-direction: row;justify-content: space-around">
-    <div style="background-color: gainsboro;padding: 10px;border-radius: 10px">
+    <div style="background-color: gainsboro;padding: 10px;border-radius: 10px;width: 30vw;overflow: hidden;">
         <h3>页面快照</h3>
-        <img src=COMPARE_IMG1 style="min-width: 300px;min-height: 300px" id="img1">
+        <div style="max-height: 800px;overflow-y: auto;">
+            <img src=COMPARE_IMG1 style="width: 100%;" id="img1">
+        </div>
+
     </div>
-    <div style="background-color: gainsboro;padding: 10px;border-radius: 10px">
+    <div style="background-color: gainsboro;padding: 10px;border-radius: 10px;width: 30vw;overflow: hidden;">
         <h3>设计稿</h3>
-        <img src=COMPARE_IMG2 style="min-width: 300px;min-height: 300px" id="img2">
+        <div style="max-height: 800px;overflow-y: auto;">
+            <img src=COMPARE_IMG2 style="width: 100%;" id="img2">
+        </div>
+
     </div>
 </section>
 <br>
 <section style="display: flex;">
     <div style="width: 70%;display: flex;flex-direction:column;align-items: center;background-color: gainsboro;margin: 10px;border-radius: 20px">
         <h3>分析结果</h3>
-        <div style="min-width: 300px;min-height: 300px;" id="image-diff"></div>
+        <div style="width: 100%;overflow-x:hidden;" id="image-diff"></div>
     </div>
     <div style="background-color: #a9dba9;margin-left: 5px;width: 25%;align-items: center;display: flex;flex-direction: column;">
         <h3>控制面板</h3>
@@ -45,25 +51,29 @@
     const image2 = document.getElementById('img2');
 
     function load_compare() {
-        fetch(image1.src).then(res => res.blob()).then(blob => {
-            file1 = new File([blob], "File name",{ type: "image/png" })
-            if(file2){
-                resembleControl = resemble(file1)
-                    .compareTo(file2)
-                    .onComplete(onComplete);
-                resembleControl.scaleToSameSize();
-            }
-        })
-        fetch(image2.src).then(res => res.blob()).then(blob => {
-            file2 = new File([blob], "File name",{ type: "image/png" })
-            if(file1){
-
-                resembleControl = resemble(file1)
-                    .compareTo(file2)
-                    .onComplete(onComplete);
-                resembleControl.scaleToSameSize();
-            }
-        })
+        // fetch(image1.src).then(res => res.blob()).then(blob => {
+        //     file1 = new File([blob], "File name",{ type: "image/png" })
+        //     if(file2){
+        //         resembleControl = resemble(file1)
+        //             .compareTo(file2)
+        //             .onComplete(onComplete);
+        //         resembleControl.scaleToSameSize();
+        //     }
+        // })
+        // fetch(image2.src).then(res => res.blob()).then(blob => {
+        //     file2 = new File([blob], "File name",{ type: "image/png" })
+        //     if(file1){
+        //
+        //         resembleControl = resemble(file1)
+        //             .compareTo(file2)
+        //             .onComplete(onComplete);
+        //         resembleControl.scaleToSameSize();
+        //     }
+        // })
+        resembleControl = resemble(image1.src)
+            .compareTo(image2.src)
+            .onComplete(onComplete);
+        resembleControl.scaleToSameSize();
 
     }
     load_compare();

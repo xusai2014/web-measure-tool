@@ -22,19 +22,18 @@ export default async function (url, image, options) {
     const chrome = await chromeLauncher.launch({chromeFlags: ['--headless']});
     const {default: ora} = await import('ora');
     const spinner = ora('启动设计稿还原度分析').start();
+
     try {
 
         const {
             settings = {}
         } = options;
+        const uaClient = settings.device === 'desktop'? 'desktop':'mobile'
         if(settings.width){
-            screenEmulation.width = settings.width;
+            devices[uaClient].screenEmulation.width = settings.width;
         }
         if(settings.height) {
-            screenEmulation.height = settings.height;
-        }
-        if (settings.device) {
-            screenEmulation.mobile = settings.device === 'desktop'? false: true;
+            devices[uaClient].screenEmulation.height = settings.height;
         }
 
         const runnerResult = await lighthouse(url, {
@@ -44,14 +43,11 @@ export default async function (url, image, options) {
             ...config,
             settings: {
                 ...config.settings,
-                ...devices[settings.device],
+                ...devices[uaClient],
                 onlyAudits: ['final-screenshot'],
                 onlyCategories: [
                     'performance'
                 ],
-                screenEmulation: {
-                    ...screenEmulation,
-                }
             }
         });
         const rng = seedRandom();

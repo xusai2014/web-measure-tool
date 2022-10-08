@@ -2,7 +2,6 @@ import * as constants from 'lighthouse/lighthouse-core/config/constants';
 const devices = {
     desktop: {
         formFactor: 'desktop',
-        throttling: constants.throttling.desktopDense4G,
         screenEmulation: constants.screenEmulationMetrics.desktop,
         emulatedUserAgent: constants.userAgents.desktop,
     },
@@ -11,7 +10,9 @@ const devices = {
         onlyCategories: ['performance'],
     },
     mobile: {
-
+        formFactor: 'mobile',
+        screenEmulation: constants.screenEmulationMetrics.mobile,
+        emulatedUserAgent: constants.userAgents.mobile,
     }
 }
 
